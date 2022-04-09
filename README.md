@@ -9,7 +9,7 @@ https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a
 - open http://localhost:5050/ and login (admin@admin.com / root)
 - Add New Server
   - Name - my_db
-  - Host - 192.168.80.2
+  - Host name/address - pg_container
   - Username - root
   - Password - root
 
