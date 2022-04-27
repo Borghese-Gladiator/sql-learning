@@ -114,7 +114,37 @@ SELECT * FROM Customers AS Consumers;
 
 -- SQL Join
 SELECT * FROM Orders
-  LEFT JOIN
+  LEFT JOIN Customers
+  On Orders.CustomerID=Customers.CustomerID; -- Insert the missing parts in the JOIN clause to join the two tables Orders and Customers, using the CustomerID field in both tables as the relationship between the two tables.
+SELECT * FROM Orders
+  INNER JOIN Customers
+  On Orders.CustomerID=Customers.CustomerID; -- Choose the correct JOIN clause to select all records from the two tables where there is a match in both tables.
+SELECT * FROM Orders
+  RIGHT JOIN Customers
+  On Orders.CustomerID=Customers.CustomerID; -- Choose the correct JOIN clause to select all records from the two tables where there is a match in both tables.
 
 -- SQL Group By
+SELECT COUNT(CustomerID), Country
+  FROM Customers
+  GROUP BY Country;
+SELECT COUNT(CustomerID), Country
+  FROM Customers
+  GROUP BY Country
+  ORDER BY COUNT(CustomerID) DESC; -- List the number of customers in each country, ordered by the country with the most customers first.
+
 -- SQL Database
+CREATE DATABASE testDB; -- create database
+DROP DATABASE testDB; -- delete database
+CREATE TABLE Persons (
+  PersonID int,
+  LastName varchar(255),
+  FirstName varchar(255),
+  Address varchar(255),
+  City varchar(255)
+);
+DROP TABLE Persons;
+TRUNCATE TABLE Persons; -- deletes all data inside table
+ALTER TABLE Persons
+  ADD Birthday DATE; -- add column of type DATE called Birthday
+ALTER TABLE Persons
+  DROP COLUMN Birthday; -- Delete the column Birthday from the Persons table.
