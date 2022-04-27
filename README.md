@@ -1,7 +1,10 @@
 # SQL Learning
 Learn SQL using local Docker Setup and free online courses (W3Schools)
 
-## Docker Setup
+## Contents
+- w3-exercises.sql - contains all 52 exercises from W3 Schools SQL
+
+## Docker Postgres Setup
 
 ### Docker Compose Setup
 https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a6a8ae918b5
