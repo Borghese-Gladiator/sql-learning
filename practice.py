@@ -113,3 +113,7 @@ def caesarCipher(s, k):
     for c in s:
         result += encryptChar(c, k)
     return result
+
+# String Reversal
+def isPalindrome(s1):
+    return s1 == s1[::-1]
