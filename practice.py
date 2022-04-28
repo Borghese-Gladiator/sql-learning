@@ -72,20 +72,20 @@ def diagonalOrder(matrix):
  
         print()
 
-array = [
+matrix = [
     [1, 2, 3, 4],
     [5, 6, 7, 8],
     [9, 10, 11, 12],
     [13, 14, 15, 16],
     [17, 18, 19, 20]
 ]
-diagonalOrder(array)
+diagonalOrder(matrix)
 
 # 2D Iteration - Columns
-columns = list(zip(*array)) # list of tuples
+columns = list(zip(*matrix)) # list of tuples
 colMatrix = []
-for i in range(len(array[0])):
-  colMatrix.append([row[i] for row in array])
+for i in range(len(matrix[0])):
+  colMatrix.append([row[i] for row in matrix])
 
 # 2D Iteration - printing matrix
 print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in matrix]))
