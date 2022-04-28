@@ -4,6 +4,7 @@ Python Practice and Reference
 
 # Lambdas
 # Functional Programming
+reduce
 # Zip Use Cases
 
 # Decimal Formatting - prints 6 decimal places formatted
@@ -85,6 +86,9 @@ columns = list(zip(*array)) # list of tuples
 colMatrix = []
 for i in range(len(array[0])):
   colMatrix.append([row[i] for row in array])
+
+# 2D Iteration - printing matrix
+print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in matrix]))
 
 # Enumerate
 for idx, val in enumerate(["One", "Two", "Three"]):
