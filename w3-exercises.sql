@@ -40,6 +40,7 @@ VALUES (
   '4306',
   'Norway'
 )
+INSERT INTO Persons (LastName) VALUES ('Olsen')
 
 -- SQL Null
 SELECT * FROM Customers
