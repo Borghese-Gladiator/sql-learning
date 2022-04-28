@@ -2,6 +2,10 @@
 Python Practice and Reference
 '''
 
+# Lambdas
+# Functional Programming
+# Zip Use Cases
+
 # Decimal Formatting - prints 6 decimal places formatted
 print("{:.6f}".format(1 / 3))
 print(f'{1 / 3:.6f}')
@@ -18,6 +22,11 @@ sorted(["JAMES", "James", "james"], reverse=True)
 from datetime import datetime
 oldDate = datetime.strptime("12:00:00AM", '%I:%M:%S%p')
 newDate = oldDate.strftime('%H:%M:%S')
+
+# Dates - check if gap is greater than one year
+from datetime import timedelta
+one_year_delta = timedelta(days = 365)
+datetime.strptime("20050109", '%Y%m%d') - datetime.strptime("20050109", '%Y%m%d') < one_year_delta
 
 # Count - counts number of elements with specified value
 [1, 2, "a", "b"].count("a")
@@ -38,26 +47,10 @@ def getLeftDiagonal(arr):
 def diagonalDifference(arr):
     return abs(getLeftDiagonal(arr) - getLeftDiagonal(arr))
 
-# 2D Array Iteration - all diagonals
-array = [
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12],
-    [13, 14, 15, 16],
-    [17, 18, 19, 20]
-]
-dim = len(array)
-for k in range(dim): # top half
-    for j in range(k):
-        i = k - j
-        print(array[i][j])
-for k  in(dim - 2, 0, -1): # bottom half
-    for j in range(k):
-        i = k - j
-        print(array[dim - j - 1][dim - i - 1])
-
 # 2D Array Iteration - diagonals
 def diagonalOrder(matrix):
+    ROW = len(matrix)
+    COL = len(matrix[0])
     # There will be ROW+COL-1 lines in the output
     for line in range(1, (ROW + COL)):
         # Get column index of the first element
@@ -77,6 +70,21 @@ def diagonalOrder(matrix):
                         [start_col + j], end="\t")
  
         print()
+
+array = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12],
+    [13, 14, 15, 16],
+    [17, 18, 19, 20]
+]
+diagonalOrder(array)
+
+# 2D Iteration - Columns
+columns = list(zip(*array)) # list of tuples
+colMatrix = []
+for i in range(len(array[0])):
+  colMatrix.append([row[i] for row in array])
 
 # Enumerate
 for idx, val in enumerate(["One", "Two", "Three"]):
@@ -117,3 +125,14 @@ def caesarCipher(s, k):
 # String Reversal
 def isPalindrome(s1):
     return s1 == s1[::-1]
+
+# List Equality - without order
+import collections
+collections.Counter([0,2,1]) == collections.Counter([0,2,1])
+
+# List Equality - with order
+[0,1,2] == [0,2,1]
+
+# Split Word into characters
+word = "blah"
+wordList = [char for char in word]
