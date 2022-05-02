@@ -2,10 +2,74 @@
 Python Practice and Reference
 '''
 
-# Lambdas
-# Functional Programming
-reduce
-# Zip Use Cases
+# Iterate over numbers
+def superDigit(n: str, k: int):
+  print(n, k)
+  p = int(n * k)
+  s = 0
+  while p > 0 or s > 9:
+      if p == 0:
+          p = s
+          s = 0
+      s += p % 10
+      p //= 10
+  return s
+superDigit("148", 3)
+
+# Exception
+try:
+  "+".join([1, 2, 3, 4, 5])
+except Exception as e:
+  print(e)
+
+# Lambda
+(lambda s: s[::-1])("I am a string")
+(lambda x1, x2, x3: (x1 + x2 + x3) / 3)(9, 6, 6)
+
+# Map - reverses each string in list
+list(map(lambda s: s[::-1], ["cat", "dog", "hedgehog", "gecko"]))
+list(
+  map(
+    (lambda a, b, c: a + b + c),
+    [1, 2, 3],
+    [10, 20, 30],
+    [100, 200, 300]
+  )
+)
+
+# Lambda with if statement - Use map to see which numbers are divisible by 3
+bool_list = map(lambda x: 1 if x%3==0 else 0, list(range(20)))
+
+# Count unique values
+len(set(list(range(20))))
+from collections import Counter
+len(Counter(list(range(20))).keys())
+
+# Filter
+list(filter(lambda x: x > 100, [1, 111, 2, 222, 3, 333]))
+list(filter(lambda x: x % 2 == 0, range(10)))
+list(filter(lambda s: s.isupper(), ["cat", "Cat", "CAT", "dog", "Dog", "DOG", "emu", "Emu", "EMU"]))
+
+# Zip Use Cases 
+a_list = ["A", "A", "A"]
+b_list = [0, 1, 2]
+for a, b in zip(a_list, b_list):
+  print(a, b)
+
+# Regex
+
+# Combinatoric Iterators - permutation, combination
+import itertools
+x = [1, 2, 3]
+y = ['A', 'B']
+print(list(itertools.product(x, y)))
+print(list(itertools.permutations(x)))
+
+y = ['A', 'B', 'C', 'D']
+print(list(itertools.combinations(y, 3)))
+
+z = ['A', 'B', 'C']
+print(list(itertools.combinations_with_replacement(z, 2)))
 
 # Decimal Formatting - prints 6 decimal places formatted
 print("{:.6f}".format(1 / 3))
@@ -39,14 +103,14 @@ def getLeftDiagonal(arr):
         left += arr[i][i]
     return left
 
-def getLeftDiagonal(arr):
+def getRightDiagonal(arr):
     right = 0
     for i in range(len(arr)):
         right += arr[i][len(arr) - 1 - i]
     return right
 
 def diagonalDifference(arr):
-    return abs(getLeftDiagonal(arr) - getLeftDiagonal(arr))
+    return abs(getLeftDiagonal(arr) - getRightDiagonal(arr))
 
 # 2D Array Iteration - diagonals
 def diagonalOrder(matrix):
@@ -79,6 +143,7 @@ matrix = [
     [13, 14, 15, 16],
     [17, 18, 19, 20]
 ]
+# diagonalDifference(matrix) # only works on square matrices
 diagonalOrder(matrix)
 
 # 2D Iteration - Columns
