@@ -226,8 +226,124 @@ def letter_cmp(a, b):
             return -1
     else:
         return 1
-letter_cmp_key = cmp_to_key(letter_cmp)
-[('c', 2), ('b', 2), ('a', 3)].sort(key=letter_cmp_key)
-sorted([('c', 2), ('b', 2), ('a', 3)], key=cmp_to_key(letter_cmp))
+[('c', 2), ('b', 2), ('a', 3)].sort(key=cmp_to_key(letter_cmp))
+print(sorted([('c', 2), ('b', 2), ('a', 3)], key=cmp_to_key(letter_cmp)))
+
+from operator import itemgetter
+L=[[0, 1, 'f'], [4, 2, 't'], [9, 4, 'afsd']]
+sorted(L, key=itemgetter(2), reverse=True)
+
+class Pokemon:
+  def __init__(self, name, category, attack):
+    self.name = name
+    self.category = category
+    self.attack = attack
+  def __repr__(self):
+    # string representation function
+    return repr((self.name, self.category, self.attack))
+pokemon_list = [
+  Pokemon('Beedrill', 'Poison', 90),
+  Pokemon('Charmander', 'Fire', 52),
+  Pokemon('Blastoise', 'Water', 83),
+]
+print(sorted(pokemon_list, key=lambda x: x.attack))
+
+# Sort with key on first and second element of each tuple
+l = [(3, 'aaa'), (1, 'bbbb'), (3, 'ab'), (2, 'aaa')]
+sorted(l, key = lambda x: (x[0], x[1]))
+# Sort number in descending order and word in ascending order
+sorted(l, key = lambda x: (-x[0], x[1]))
 
 # Regex
+import re
+## Search for pattern 'iii' in string 'piiig'.
+## All of the pattern must match, but it may appear anywhere.
+## On success, match.group() is matched text.
+match = re.search(r'iii', 'piiig') # found, match.group() == "iii"
+match = re.search(r'igs', 'piiig') # not found, match == None
+
+## . = any char but \n
+match = re.search(r'..g', 'piiig') # found, match.group() == "iig"
+
+## \d = digit char, \w = word char
+match = re.search(r'\d\d\d', 'p123g') # found, match.group() == "123"
+match = re.search(r'\w\w\w', '@@abcd!!') # found, match.group() == "abc"
+
+## i+ = one or more i's, as many as possible.
+match = re.search(r'pi+', 'piiig') # found, match.group() == "piii"
+
+## Finds the first/leftmost solution, and within it drives the +
+## as far as possible (aka 'leftmost and largest').
+## In this example, note that it does not get to the second set of i's.
+match = re.search(r'i+', 'piigiiii') # found, match.group() == "ii"
+
+## \s* = zero or more whitespace chars
+## Here look for 3 digits, possibly separated by whitespace.
+match = re.search(r'\d\s*\d\s*\d', 'xx1 2   3xx') # found, match.group() == "1 2   3"
+match = re.search(r'\d\s*\d\s*\d', 'xx12  3xx') # found, match.group() == "12  3"
+match = re.search(r'\d\s*\d\s*\d', 'xx123xx') # found, match.group() == "123"
+
+## ^ = matches the start of string, so this fails:
+match = re.search(r'^b\w+', 'foobar') # not found, match == None
+## but without the ^ it succeeds:
+match = re.search(r'b\w+', 'foobar') # found, match.group() == "bar"
+
+match = re.search(r'[\w.-]+@[\w.-]+', str)
+if match:
+  print(match.group())  ## 'alice-b@google.com'
+
+str = 'purple alice-b@google.com monkey dishwasher'
+match = re.search(r'([\w.-]+)@([\w.-]+)', str)
+if match:
+  print(match.group())   ## 'alice-b@google.com' (the whole match)
+  print(match.group(1))  ## 'alice-b' (the username, group 1)
+  print(match.group(2))  ## 'google.com' (the host, group 2)
+
+## Suppose we have a text with many email addresses
+str = 'purple alice@google.com, blah monkey bob@abc.com blah dishwasher'
+
+## Here re.findall() returns a list of all the found email strings
+emails = re.findall(r'[\w\.-]+@[\w\.-]+', str) ## ['alice@google.com', 'bob@abc.com']
+for email in emails:
+  # do something with each found email string
+  print(email)
+
+str = 'purple alice@google.com, blah monkey bob@abc.com blah dishwasher'
+tuples = re.findall(r'([\w\.-]+)@([\w\.-]+)', str)
+print(tuples)  ## [('alice', 'google.com'), ('bob', 'abc.com')]
+for tuple in tuples:
+  print(tuple[0])  ## username
+  print(tuple[1])  ## host
+
+'''
+[]	A set of characters	"[a-m]"	
+\	Signals a special sequence (can also be used to escape special characters)	"\d"	
+.	Any character (except newline character)	"he..o"	
+^	Starts with	"^hello"	
+$	Ends with	"planet$"	
+*	Zero or more occurrences	"he.*o"	
++	One or more occurrences	"he.+o"	
+?	Zero or one occurrences	"he.?o"	
+{}	Exactly the specified number of occurrences	"he.{2}o"	
+|	Either or	"falls|stays"	
+()	Capture and group
+'''
+
+'''
+[arn]	Returns a match where one of the specified characters (a, r, or n) are present	
+[a-n]	Returns a match for any lower case character, alphabetically between a and n	
+[^arn]	Returns a match for any character EXCEPT a, r, and n	
+[0123]	Returns a match where any of the specified digits (0, 1, 2, or 3) are present	
+[0-9]	Returns a match for any digit between 0 and 9	
+[0-5][0-9]	Returns a match for any two-digit numbers from 00 and 59	
+[a-zA-Z]	Returns a match for any character alphabetically between a and z, lower case OR upper case	
+[+]	In sets, +, *, ., |, (), $,{} has no special meaning, so [+] means: return a match for any + character in the string	\
+'''
+
+txt = "The rain in Spain"
+x = re.split("\s", txt)
+print(x)
+x = re.search(r"\bS\w+", txt) # Match object, None if nothing found
+print(x.string)
+print(x.span())
+print(x.group())
