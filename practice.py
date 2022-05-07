@@ -3,8 +3,8 @@ Python Practice and Reference
 '''
 
 # Iterate over numbers
+print("DIGIT ITERATION")
 def superDigit(n: str, k: int):
-  print(n, k)
   p = int(n * k)
   s = 0
   while p > 0 or s > 9:
@@ -20,10 +20,10 @@ superDigit("148", 3)
 try:
   "+".join([1, 2, 3, 4, 5])
 except Exception as e:
-  print(e)
+  print(f"EXCEPTION SYNTAX: {e}")
 
 # Lambda
-(lambda s: s[::-1])("I am a string")
+print("LAMBDA: {}".format((lambda s: s[::-1])("gnirts a ma I")))
 (lambda x1, x2, x3: (x1 + x2 + x3) / 3)(9, 6, 6)
 
 # Map - reverses each string in list
@@ -40,25 +40,27 @@ list(
 # Lambda with if statement - Use map to see which numbers are divisible by 3
 bool_list = map(lambda x: 1 if x%3==0 else 0, list(range(20)))
 
-# Count unique values
-len(set(list(range(20))))
-from collections import Counter
-len(Counter(list(range(20))).keys())
-
 # Filter
 list(filter(lambda x: x > 100, [1, 111, 2, 222, 3, 333]))
 list(filter(lambda x: x % 2 == 0, range(10)))
 list(filter(lambda s: s.isupper(), ["cat", "Cat", "CAT", "dog", "Dog", "DOG", "emu", "Emu", "EMU"]))
 
+# Count unique values
+from collections import Counter
+a_tuple = (1, 2, 3) # immutable, more memory efficient
+a_set = {1, 2, 3}
+len(set(list(range(20))))
+len(Counter(list(range(20))).keys())
+
 # Zip Use Cases 
 a_list = ["A", "A", "A"]
 b_list = [0, 1, 2]
+print("ZIP")
 for a, b in zip(a_list, b_list):
   print(a, b)
 
-# Regex
-
 # Combinatoric Iterators - permutation, combination
+print("COMBINATORIC ITERATORS")
 import itertools
 x = [1, 2, 3]
 y = ['A', 'B']
@@ -72,8 +74,8 @@ z = ['A', 'B', 'C']
 print(list(itertools.combinations_with_replacement(z, 2)))
 
 # Decimal Formatting - prints 6 decimal places formatted
-print("{:.6f}".format(1 / 3))
-print(f'{1 / 3:.6f}')
+"{:.6f}".format(1 / 3)
+print(f'DECIMAL FORMATTING: {1 / 3:.6f}')
 
 # Sorting - sort() sorts in place
 [1, 2, 3].sort()
@@ -84,6 +86,7 @@ sorted("I like to sort".split())
 sorted(["JAMES", "James", "james"], reverse=True)
 
 # Dates - convert 12-hour format to 24-hour format
+print("DATETIMES")
 from datetime import datetime
 oldDate = datetime.strptime("12:00:00AM", '%I:%M:%S%p')
 newDate = oldDate.strftime('%H:%M:%S')
@@ -156,10 +159,12 @@ for i in range(len(matrix[0])):
 print('\n'.join([''.join(['{:4}'.format(item) for item in row]) for row in matrix]))
 
 # Enumerate
+print("ENUMERATE")
 for idx, val in enumerate(["One", "Two", "Three"]):
     print(idx, val)
 
 # Median
+print("MEDIAN")
 lst = sorted([3, 2, 1])
 if len(lst) % 2 == 0:
     # Applying formula which is sum of middle two divided by 2
@@ -172,6 +177,7 @@ else:
 result = [0] * 100
 
 # Character Code - Caesar cipher
+print("CAESAR CIPHER")
 def encryptChar(c, k):
     if c.isupper():
         c_index = ord(c) - ord('A')
@@ -200,8 +206,28 @@ import collections
 collections.Counter([0,2,1]) == collections.Counter([0,2,1])
 
 # List Equality - with order
-[0,1,2] == [0,2,1]
+print(f"LIST EQUALITY: [0,1,2] == [0,2,1] is {[0,1,2] == [0,2,1]}")
 
 # Split Word into characters
+print("SPLIT WORD INTO CHARACTERS")
 word = "blah"
 wordList = [char for char in word]
+
+# Custom Sort
+print("CUSTOM SORT FUNCTION")
+from functools import cmp_to_key
+def letter_cmp(a, b):
+    if a[1] > b[1]:
+        return -1
+    elif a[1] == b[1]:
+        if a[0] > b[0]:
+            return 1
+        else:
+            return -1
+    else:
+        return 1
+letter_cmp_key = cmp_to_key(letter_cmp)
+[('c', 2), ('b', 2), ('a', 3)].sort(key=letter_cmp_key)
+sorted([('c', 2), ('b', 2), ('a', 3)], key=cmp_to_key(letter_cmp))
+
+# Regex
