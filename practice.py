@@ -37,6 +37,10 @@ list(
   )
 )
 
+# any - checking if condition holds for any element
+if any(val > 2 for val in range(10)):
+  print(f"ANY: {any(val > 2 for val in range(10))}")
+
 # Lambda with if statement - Use map to see which numbers are divisible by 3
 bool_list = map(lambda x: 1 if x%3==0 else 0, list(range(20)))
 
@@ -288,7 +292,6 @@ match = re.search(r'^b\w+', 'foobar') # not found, match == None
 ## but without the ^ it succeeds:
 match = re.search(r'b\w+', 'foobar') # found, match.group() == "bar"
 
-match = re.search(r'[\w.-]+@[\w.-]+', str)
 if match:
   print(match.group())  ## 'alice-b@google.com'
 
