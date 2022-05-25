@@ -7,3 +7,6 @@ Learn SQL using local Docker Setup and free online courses (W3Schools)
 - practice.py - Python practice before Amazon Coding Challenge
 - postgres.md - info on setting up postgres and data types
 - pgadmin.md - info on setting up pgadmin
+- SQL - [https://towardsdatascience.com/10-problems-to-practice-almost-all-sql-concepts-37545e7c5219](https://towardsdatascience.com/10-problems-to-practice-almost-all-sql-concepts-37545e7c5219)
+	- exercises.sql
+	- sql.md
