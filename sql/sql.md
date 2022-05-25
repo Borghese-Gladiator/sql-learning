@@ -58,3 +58,14 @@ SELECT date, city, AVG(amount) AS avg_transaction_amount_for_city
 FROM transactions
 GROUP BY date, city;
 ```
+
+## SQL Window Functions
+window functions operate on a set of rows caleld a window frame and return a single value for each row from the query (using the OVER() cause)
+
+SQL PARTITION BY - divides result set into partitions to perform computation on each subset
+```sql
+SELECT id, date, city, amount,
+       AVG(amount) OVER (PARTITION BY date, city) AS  avg_daily_transaction_amount_for_city
+FROM transactions
+ORDER BY id;
+```
